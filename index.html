@@ -3,188 +3,455 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Agentic Commerce — 60-second view</title>
+<title>Agent Trust & Payment Frameworks — Comparison</title>
 <style>
-  :root { color-scheme: light; }
+  :root {
+    color-scheme: light;
+    --bg: #f6f7fb;
+    --panel: #ffffff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e5e7eb;
+    --line-2: #f1f5f9;
+    --brand: #4f46e5;
+    --brand-2: #ec4899;
+    --verun: #0ea5e9;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --bad: #dc2626;
+    --shadow: 0 4px 14px rgba(15,23,42,.05);
+  }
   * { box-sizing: border-box; }
   body {
-    margin: 0; padding: 28px;
+    margin: 0; padding: 32px 24px 64px;
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-    background: #f6f7fb; color: #0f172a;
+    background: var(--bg); color: var(--ink); line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
   }
-  .page { max-width: 1200px; margin: 0 auto; }
+  .page { max-width: 1320px; margin: 0 auto; }
+
+  header { margin-bottom: 28px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid var(--line);
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--brand);
+  }
   h1 {
-    font-size: 26px; margin: 0 0 4px;
-    background: linear-gradient(90deg, #4f46e5, #db2777);
+    font-size: clamp(26px, 3.4vw, 34px); margin: 12px 0 8px; line-height: 1.15;
+    background: linear-gradient(90deg, var(--brand), var(--brand-2));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .sub { color: #64748b; font-size: 13.5px; margin: 0 0 22px; }
+  .lede { color: var(--muted); margin: 0; max-width: 880px; font-size: 15px; }
 
-  /* 5 cards in a row */
-  .row {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
-    margin-bottom: 22px;
+  h2 { font-size: 19px; margin: 36px 0 14px; display: flex; align-items: center; gap: 10px; }
+  h2 .num {
+    font-size: 11px; font-weight: 700; letter-spacing: .05em; color: #fff;
+    background: var(--brand); padding: 3px 9px; border-radius: 999px;
   }
-  .c {
-    background: #fff; border-radius: 14px; padding: 16px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 14px rgba(15,23,42,.05);
-    display: flex; flex-direction: column; gap: 8px; min-height: 180px;
+
+  /* CARDS */
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; display: flex; flex-direction: column; gap: 6px;
+    box-shadow: var(--shadow);
   }
+  .card.highlight {
+    border-color: var(--verun);
+    background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+  }
+  .card-top { display:flex; align-items:center; gap: 9px; }
   .badge {
-    width: 36px; height: 36px; border-radius: 9px;
+    width: 34px; height: 34px; border-radius: 8px;
     display: grid; place-items: center; color: #fff;
-    font-size: 12px; font-weight: 700; letter-spacing: .03em;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
   }
   .b1 { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
   .b2 { background: linear-gradient(135deg, #1a1f71, #3b82f6); }
   .b3 { background: linear-gradient(135deg, #635bff, #a855f7); }
   .b4 { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
   .b5 { background: linear-gradient(135deg, #eb001b, #f79e1b); }
-  .c h3 { margin: 0; font-size: 14px; font-weight: 700; }
-  .c .role { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
-  .c .one { font-size: 13px; color: #1f2937; line-height: 1.45; }
-  .c .fee {
-    margin-top: auto; font-size: 11.5px; font-weight: 600;
-    background: #eef2ff; color: #3730a3;
-    padding: 4px 8px; border-radius: 999px; align-self: flex-start;
+  .b6 { background: linear-gradient(135deg, #10b981, #0ea5e9); }
+  .role {
+    font-size: 9.5px; color: var(--muted); text-transform: uppercase;
+    font-weight: 600; letter-spacing: .08em;
+  }
+  .card h3 { margin: 0; font-size: 13px; font-weight: 700; line-height: 1.25; }
+  .card .vendor { font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+  .card .one { font-size: 12px; color: #1f2937; margin: 4px 0 0; line-height: 1.4; }
+  .new-tag {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    background: #10b981; color: #fff; padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .05em; text-transform: uppercase; margin-left: 6px;
   }
 
-  /* Flow diagram */
-  .flow {
-    background: #fff; border-radius: 14px; padding: 22px;
-    border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(15,23,42,.05);
-    margin-bottom: 22px;
+  /* TABLE */
+  .tablewrap {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden; box-shadow: var(--shadow);
   }
-  .flow h2 { margin: 0 0 14px; font-size: 16px; }
-  .flow .pipeline {
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    flex-wrap: wrap;
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 1240px; }
+  thead th {
+    text-align: left; font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--muted); font-weight: 700;
+    background: #f9fafb;
+    padding: 11px 12px; border-bottom: 2px solid var(--line);
+    vertical-align: bottom;
   }
-  .node {
-    flex: 1; min-width: 130px;
-    background: #f8fafc; border: 1px solid #e2e8f0;
-    border-radius: 10px; padding: 10px 12px; text-align: center;
+  thead th.col-head { font-weight: 700; color: var(--ink); font-size: 12.5px; text-transform: none; letter-spacing: 0; }
+  thead th .pill {
+    display: inline-block; margin-top: 4px;
+    font-size: 9.5px; padding: 2px 7px; border-radius: 999px;
+    font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
   }
-  .node .who { font-weight: 700; font-size: 13px; }
-  .node .what { font-size: 11.5px; color: #64748b; margin-top: 2px; }
-  .arrow {
-    color: #94a3b8; font-size: 18px; flex-shrink: 0;
+  .p1 { background: #e0f2fe; color: #075985; }
+  .p2 { background: #dbeafe; color: #1e40af; }
+  .p3 { background: #ede9fe; color: #5b21b6; }
+  .p4 { background: #cffafe; color: #155e75; }
+  .p5 { background: #fff7ed; color: #9a3412; }
+  .p6 { background: #d1fae5; color: #065f46; }
+  tbody td {
+    padding: 11px 12px; border-bottom: 1px solid var(--line-2);
+    vertical-align: top; font-size: 12px; line-height: 1.45;
   }
-  .stack-tag {
-    display: inline-block; margin-top: 6px; font-size: 10.5px;
-    background: #ecfdf5; color: #047857;
-    padding: 2px 7px; border-radius: 6px; font-weight: 600;
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.section td {
+    background: #fafafa; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); padding: 8px 12px;
   }
-  .stack-tag.v { background: #eff6ff; color: #1d4ed8; }
-  .stack-tag.s { background: #f5f3ff; color: #6d28d9; }
-  .stack-tag.m { background: #fff7ed; color: #c2410c; }
+  td.feat { font-weight: 600; color: var(--ink); white-space: nowrap; background: #fcfcfd; }
+  .yes { color: var(--ok); font-weight: 700; }
+  .no  { color: var(--bad); font-weight: 700; }
+  .mid { color: var(--warn); font-weight: 700; }
+  .fee-tag {
+    display: inline-block; padding: 2px 7px; border-radius: 999px;
+    background: #eef2ff; color: #3730a3; font-weight: 600; font-size: 11px;
+  }
+  /* signal cell highlight */
+  td.signal-yes { background: #f0fdf4; }
+  td.signal-no  { background: #fef2f2; }
+  td.signal-mid { background: #fffbeb; }
 
-  /* Quick-pick row */
-  .picks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .pick {
-    background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-    padding: 14px 16px;
+  /* VERUN POSITIONING */
+  .verun-box {
+    background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
+    border: 1px solid #bae6fd;
+    border-radius: 14px; padding: 22px;
+    box-shadow: var(--shadow);
   }
-  .pick b { color: #4f46e5; }
-  .pick p { margin: 4px 0 0; font-size: 13px; color: #1f2937; }
+  .verun-box h3 {
+    margin: 0 0 10px; font-size: 17px;
+    color: #0c4a6e;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .verun-box h3::before {
+    content: ""; width: 28px; height: 28px; border-radius: 7px;
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
+    display: inline-block;
+  }
+  .stance { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+  .row-stance {
+    display: flex; gap: 10px; padding: 10px 12px;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+    font-size: 12.5px;
+  }
+  .row-stance .name { font-weight: 700; min-width: 130px; }
+  .row-stance .verdict {
+    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: .05em; height: fit-content;
+  }
+  .v-ingest { background: #d1fae5; color: #065f46; }
+  .v-skip   { background: #fee2e2; color: #991b1b; }
+  .v-watch  { background: #fef3c7; color: #92400e; }
+  .row-stance .desc { color: #1f2937; flex: 1; }
 
-  @media (max-width: 900px) {
-    .row { grid-template-columns: repeat(2, 1fr); }
-    .picks { grid-template-columns: 1fr; }
+  footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+  footer a { color: var(--brand); text-decoration: none; margin-right: 4px; }
+  footer .brand { font-weight: 600; color: var(--ink); }
+
+  @media (max-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+    .stance { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <h1>Agentic Commerce — in 60 seconds</h1>
-  <p class="sub">5 frameworks, one glance. What each one is, what it costs, and where it sits in the agent-pays-merchant flow. <a href="comparison.html" style="color:#4f46e5; font-weight:600; text-decoration:none;">→ Full comparison</a></p>
-
-  <!-- 5 CARDS -->
-  <div class="row">
-    <div class="c">
-      <div class="badge b1">TA</div>
-      <div class="role">Strategy</div>
-      <h3>Trusted Agents</h3>
-      <div class="one">Consultancy. Helps teams design safe agent UX & GTM.</div>
-      <span class="fee">Custom $$</span>
-    </div>
-    <div class="c">
-      <div class="badge b2">VISA</div>
-      <div class="role">Edge Trust</div>
-      <h3>Visa TAP</h3>
-      <div class="one">Open protocol — proves "this agent is real" to merchants.</div>
-      <span class="fee">Free / Open</span>
-    </div>
-    <div class="c">
-      <div class="badge b3">S</div>
-      <div class="role">Sell-Side</div>
-      <h3>Stripe Agents</h3>
-      <div class="one">Sell your products inside ChatGPT-style agents. Checkout + tax + fraud built-in.</div>
-      <span class="fee">~2.9% + 30¢</span>
-    </div>
-    <div class="c">
-      <div class="badge b4">SP</div>
-      <div class="role">Dev Infra</div>
-      <h3>Stripe Projects</h3>
-      <div class="one">CLI for agents to spin up DBs/auth & pay providers via tokens.</div>
-      <span class="fee">Pass-through</span>
-    </div>
-    <div class="c">
-      <div class="badge b5">MC</div>
-      <div class="role">Card Rail</div>
-      <h3>Mastercard Agent Pay</h3>
-      <div class="one">Tokenized card payments for verified AI agents. Issuer-grade scoring (KYA).</div>
-      <span class="fee">Network fees</span>
-    </div>
-  </div>
-
-  <!-- FLOW DIAGRAM -->
-  <div class="flow">
-    <h2>How they fit in one transaction</h2>
-    <div class="pipeline">
-      <div class="node">
-        <div class="who">👤 Buyer</div>
-        <div class="what">Asks AI to buy</div>
-      </div>
-      <div class="arrow">→</div>
-      <div class="node">
-        <div class="who">🤖 AI Agent</div>
-        <div class="what">Searches & decides</div>
-        <span class="stack-tag">TA: design</span>
-      </div>
-      <div class="arrow">→</div>
-      <div class="node">
-        <div class="who">🛡️ Merchant Edge</div>
-        <div class="what">"Are you a real agent?"</div>
-        <span class="stack-tag v">Visa TAP</span>
-      </div>
-      <div class="arrow">→</div>
-      <div class="node">
-        <div class="who">🛒 Checkout</div>
-        <div class="what">Cart, tax, shipping</div>
-        <span class="stack-tag s">Stripe Agents</span>
-      </div>
-      <div class="arrow">→</div>
-      <div class="node">
-        <div class="who">💳 Payment</div>
-        <div class="what">Token charges card</div>
-        <span class="stack-tag m">MC Agent Pay</span>
-      </div>
-    </div>
-    <p style="margin: 14px 0 0; font-size: 12px; color: #64748b;">
-      <strong>Stripe Projects</strong> sits separately — used internally so our own agents can buy infra, not for selling to customers.
+  <header>
+    <span class="eyebrow">Agentic Commerce Landscape · April 2026</span>
+    <h1>Agent Trust & Payment Frameworks — Comparison</h1>
+    <p class="lede">
+      Six frameworks defining how AI agents are identified, trusted, and paid. Side-by-side: tech, fees, integration model, and — critically — what verifiable signal each emits that a trust-aggregator layer can ingest.
     </p>
+  </header>
+
+  <!-- SECTION 1: CARDS -->
+  <h2><span class="num">01</span> The Frameworks</h2>
+  <section class="grid">
+
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b1">TA</div>
+        <div>
+          <div class="role">Strategy</div>
+          <h3>Trusted Agents</h3>
+          <div class="vendor">thetrustedagents.ai</div>
+        </div>
+      </div>
+      <p class="one">Advisory practice for agent UX, identity, governance, GTM.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b2">VISA</div>
+        <div>
+          <div class="role">Edge Trust</div>
+          <h3>Visa TAP</h3>
+          <div class="vendor">developer.visa.com</div>
+        </div>
+      </div>
+      <p class="one">Open standard so merchants can verify a real agent vs. a scraper.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b3">S</div>
+        <div>
+          <div class="role">Sell-Side</div>
+          <h3>Stripe Agentic Commerce</h3>
+          <div class="vendor">docs.stripe.com/agents</div>
+        </div>
+      </div>
+      <p class="one">Stack to sell products inside AI agents — feed, checkout, payment.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b4">SP</div>
+        <div>
+          <div class="role">Dev Infra</div>
+          <h3>Stripe Projects</h3>
+          <div class="vendor">docs.stripe.com/projects</div>
+        </div>
+      </div>
+      <p class="one">CLI for agents to provision DBs, auth, analytics &amp; pay providers.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b5">MC</div>
+        <div>
+          <div class="role">Card Rail</div>
+          <h3>Mastercard Agent Pay</h3>
+          <div class="vendor">mastercard.com</div>
+        </div>
+      </div>
+      <p class="one">Tokenized card payments for verified agents with KYA scoring.</p>
+    </article>
+
+    <article class="card highlight">
+      <div class="card-top">
+        <div class="badge b6">x402</div>
+        <div>
+          <div class="role">Crypto-Native <span class="new-tag">New</span></div>
+          <h3>x402 + GoPlausible</h3>
+          <div class="vendor">x402.org · goplausible.com</div>
+        </div>
+      </div>
+      <p class="one">HTTP 402 "Payment Required" protocol. Stablecoin micropayments per request, Algorand-native facilitator available.</p>
+    </article>
+
+  </section>
+
+  <!-- SECTION 2: TABLE -->
+  <h2><span class="num">02</span> Side-by-Side Comparison</h2>
+  <div class="tablewrap">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 180px;">Capability</th>
+            <th class="col-head">Trusted Agents<br><span class="pill p1">Strategy</span></th>
+            <th class="col-head">Visa TAP<br><span class="pill p2">Edge Trust</span></th>
+            <th class="col-head">Stripe Agents<br><span class="pill p3">Sell-Side</span></th>
+            <th class="col-head">Stripe Projects<br><span class="pill p4">Dev Infra</span></th>
+            <th class="col-head">MC Agent Pay<br><span class="pill p5">Card Rail</span></th>
+            <th class="col-head">x402 + GoPlausible<br><span class="pill p6">Crypto-Native</span></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="section"><td colspan="7">Basics</td></tr>
+          <tr><td class="feat">Type</td>
+            <td>Consultancy</td>
+            <td>Open Protocol</td>
+            <td>Payments Platform</td>
+            <td>Developer CLI</td>
+            <td>Network Program</td>
+            <td>Open Protocol + Facilitator</td></tr>
+          <tr><td class="feat">Primary Function</td>
+            <td>Strategy &amp; enablement</td>
+            <td>Verify agent at merchant edge</td>
+            <td>Sell products via AI agents</td>
+            <td>Provision &amp; pay for infra</td>
+            <td>Tokenized card payments</td>
+            <td>Per-request stablecoin payments</td></tr>
+          <tr><td class="feat">Best For</td>
+            <td>Teams designing agent UX</td>
+            <td>Any merchant on open web</td>
+            <td>D2C / e-commerce brands</td>
+            <td>Devs building agent infra</td>
+            <td>Card-issuing banks</td>
+            <td>Web3 / API monetization</td></tr>
+
+          <tr class="section"><td colspan="7">Underlying Technology</td></tr>
+          <tr><td class="feat">Core Mechanism</td>
+            <td>Frameworks &amp; playbooks</td>
+            <td>HTTP Message Sigs (RFC 9421)</td>
+            <td>Shared Payment Tokens (SPT) + Checkout</td>
+            <td>Vaulted creds + SPT billing</td>
+            <td>Agentic Tokens + KYA scoring</td>
+            <td>HTTP 402 + on-chain settlement (USDC/EURC)</td></tr>
+          <tr><td class="feat">Cryptographic ID</td>
+            <td class="no">—</td>
+            <td class="yes">✓ Per-request signature</td>
+            <td class="yes">✓ Scoped SPT</td>
+            <td class="yes">✓ Vault + SPT</td>
+            <td class="yes">✓ Tokenized card</td>
+            <td class="yes">✓ Wallet signature on-chain</td></tr>
+          <tr><td class="feat">Risk / Trust Score</td>
+            <td class="no">—</td>
+            <td class="mid">Signal layer only</td>
+            <td class="yes">Stripe Radar</td>
+            <td class="mid">Inherits Stripe</td>
+            <td class="yes">KYA — 4-tier classification</td>
+            <td class="mid">On-chain history (wallet age, TXs)</td></tr>
+          <tr><td class="feat">Open Source</td>
+            <td class="no">No</td>
+            <td class="yes">✓ visa/trusted-agent-protocol</td>
+            <td class="mid">Spec public</td>
+            <td class="no">Closed</td>
+            <td class="no">Closed</td>
+            <td class="yes">✓ x402 spec + GoPlausible facilitator</td></tr>
+
+          <tr class="section"><td colspan="7">Fees &amp; Pricing</td></tr>
+          <tr><td class="feat">Pricing Model</td>
+            <td><span class="fee-tag">Custom $$</span></td>
+            <td><span class="fee-tag">Free / Open</span></td>
+            <td><span class="fee-tag">~2.9% + 30¢</span></td>
+            <td><span class="fee-tag">Pass-through</span></td>
+            <td><span class="fee-tag">Network fees</span></td>
+            <td><span class="fee-tag">Gas + facilitator fee</span></td></tr>
+          <tr><td class="feat">Notes</td>
+            <td>Per-scope engagement</td>
+            <td>No license fee</td>
+            <td>Standard Stripe</td>
+            <td>Free CLI; pay providers</td>
+            <td>Issuer-priced</td>
+            <td>Sub-cent on Algorand; no card processor</td></tr>
+
+          <tr class="section"><td colspan="7">Integration &amp; Adoption</td></tr>
+          <tr><td class="feat">How to Integrate</td>
+            <td>Consulting sprints</td>
+            <td>Spec into edge / WAF</td>
+            <td>Stripe Dashboard / API</td>
+            <td><code>stripe project add</code></td>
+            <td>Through issuer / acquirer</td>
+            <td>Add 402 response + facilitator endpoint</td></tr>
+          <tr><td class="feat">Regulated EU Finance</td>
+            <td class="no">—</td>
+            <td class="mid">Generic</td>
+            <td class="no">Retail commerce only</td>
+            <td class="no">Out of scope</td>
+            <td class="mid">Issuer-dependent</td>
+            <td class="yes">Algorand → eWpG / MiCA path</td></tr>
+          <tr><td class="feat">Status (Apr 2026)</td>
+            <td class="yes">Active</td>
+            <td class="yes">GA + GitHub</td>
+            <td class="yes">GA</td>
+            <td class="yes">CLI public</td>
+            <td class="yes">Live with partners</td>
+            <td class="yes">Live; Algorand facilitator (GoPlausible) in beta</td></tr>
+
+          <tr class="section"><td colspan="7">Verifiable Signal Output (for trust aggregation)</td></tr>
+          <tr><td class="feat">Emits Identity Signal?</td>
+            <td class="signal-no no">No</td>
+            <td class="signal-yes yes">✓ Crypto signature per request</td>
+            <td class="signal-mid mid">SPT scope (per session)</td>
+            <td class="signal-mid mid">SPT (provider-scoped)</td>
+            <td class="signal-yes yes">✓ KYA tier (1–4)</td>
+            <td class="signal-yes yes">✓ Wallet + on-chain history</td></tr>
+          <tr><td class="feat">Aggregable into a Score?</td>
+            <td class="signal-no no">No</td>
+            <td class="signal-yes yes">✓ Yes — boolean validity</td>
+            <td class="signal-mid mid">Indirect (Radar)</td>
+            <td class="signal-no no">No</td>
+            <td class="signal-yes yes">✓ Yes — direct numeric</td>
+            <td class="signal-yes yes">✓ Yes — wallet reputation</td></tr>
+
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- QUICK PICKS -->
-  <div class="picks">
-    <div class="pick"><b>If we sell stuff →</b><p>Stripe Agents (catalog + checkout) on top of Visa TAP (filter the bots).</p></div>
-    <div class="pick"><b>If we issue cards →</b><p>Mastercard Agent Pay (tokens + KYA scoring on every agent transaction).</p></div>
-    <div class="pick"><b>If our agents build →</b><p>Stripe Projects (CLI provisions infra, pays via Shared Payment Token).</p></div>
-    <div class="pick"><b>If we're still planning →</b><p>Trusted Agents (advisory) to frame governance & rollout.</p></div>
+  <!-- SECTION 3: VERUN STANCE -->
+  <h2><span class="num">03</span> Verun's Adoption Stance</h2>
+  <div class="verun-box">
+    <h3>How Verun positions against each framework</h3>
+    <p style="margin: 0; color: #1f2937; font-size: 13.5px;">
+      Verun is a <strong>signal-aggregation layer</strong> for regulated EU agent commerce — it consumes trust signals from multiple sources, computes a unified <strong>Accredited Agent Score (0–1000)</strong>, and gates on-chain operations through validator consensus. Here's the stance on each framework:
+    </p>
+    <div class="stance">
+      <div class="row-stance">
+        <div class="name">Visa TAP</div>
+        <div class="desc">Cryptographic-signature signal feeds directly into the Verun score as a verifiable identity input.</div>
+        <span class="verdict v-ingest">Ingest</span>
+      </div>
+      <div class="row-stance">
+        <div class="name">MC Agent Pay (KYA)</div>
+        <div class="desc">4-tier KYA classification maps cleanly to Verun's tier model (LOW / MED / HIGH / BLOCK).</div>
+        <span class="verdict v-ingest">Ingest</span>
+      </div>
+      <div class="row-stance">
+        <div class="name">x402 + GoPlausible</div>
+        <div class="desc">Algorand-native payment rail — wallet history + on-chain reputation as inputs; payment gate on accredited operations.</div>
+        <span class="verdict v-ingest">Ingest + Settle</span>
+      </div>
+      <div class="row-stance">
+        <div class="name">Stripe Agentic Commerce</div>
+        <div class="desc">Built for retail D2C, not regulated securities. Useful only if Verun ever opens a fiat off-ramp surface.</div>
+        <span class="verdict v-watch">Watch</span>
+      </div>
+      <div class="row-stance">
+        <div class="name">Stripe Projects</div>
+        <div class="desc">Internal dev infra only. Not part of the agent-trust flow.</div>
+        <span class="verdict v-skip">Skip</span>
+      </div>
+      <div class="row-stance">
+        <div class="name">Trusted Agents (advisory)</div>
+        <div class="desc">Verun <em>is</em> the trust layer — overlap, not dependency. Useful as governance design reference.</div>
+        <span class="verdict v-skip">Skip</span>
+      </div>
+    </div>
   </div>
+
+  <footer>
+    <span class="brand">Verun Protocol</span> · BCP Partners GmbH · Berlin · 2026<br>
+    Sources:
+    <a href="https://thetrustedagents.ai/" target="_blank" rel="noopener">Trusted Agents</a> ·
+    <a href="https://developer.visa.com/capabilities/trusted-agent-protocol/overview" target="_blank" rel="noopener">Visa TAP</a> ·
+    <a href="https://docs.stripe.com/agents" target="_blank" rel="noopener">Stripe Agents</a> ·
+    <a href="https://docs.stripe.com/projects" target="_blank" rel="noopener">Stripe Projects</a> ·
+    <a href="https://www.mastercard.com/us/en/business/artificial-intelligence/mastercard-agent-pay.html" target="_blank" rel="noopener">Mastercard Agent Pay</a> ·
+    <a href="https://www.x402.org" target="_blank" rel="noopener">x402</a> ·
+    <a href="https://goplausible.com" target="_blank" rel="noopener">GoPlausible</a>
+  </footer>
 
 </div>
 </body>
