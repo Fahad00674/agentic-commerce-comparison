@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agentic Commerce Protocols — Comparison</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f7f8fb;
+    --panel: #ffffff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e5e7eb;
+    --brand: #4f46e5;
+    --brand-2: #7c3aed;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --bad: #dc2626;
+    --chip: #eef2ff;
+    --chip-ink: #3730a3;
+    --shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 32px;
+    margin-bottom: 24px;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.7);
+    border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; color: var(--brand);
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.1; margin: 14px 0 10px;
+    background: linear-gradient(90deg, #4f46e5, #db2777);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p { color: var(--muted); margin: 0; max-width: 780px; font-size: 16px; }
+
+  /* Quick stats */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-top: 22px;
+  }
+  .stat {
+    background: rgba(255,255,255,.85);
+    border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 16px;
+  }
+  .stat .n { font-size: 22px; font-weight: 700; }
+  .stat .l { font-size: 12px; color: var(--muted); }
+
+  /* Section heading */
+  h2 {
+    font-size: 22px; margin: 36px 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h2 .pill {
+    font-size: 11px; font-weight: 700; color: #fff;
+    background: var(--brand); padding: 3px 10px; border-radius: 999px;
+    letter-spacing: .05em; text-transform: uppercase;
+  }
+
+  /* Cards */
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 10px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(15,23,42,.08); }
+  .card-head { display: flex; align-items: center; gap: 12px; }
+  .logo {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: grid; place-items: center; font-weight: 700; color: #fff;
+    font-size: 14px; letter-spacing: .03em;
+  }
+  .logo.ta  { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+  .logo.visa { background: linear-gradient(135deg, #1a1f71, #3b82f6); }
+  .logo.stripe { background: linear-gradient(135deg, #635bff, #a855f7); }
+  .logo.proj { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
+  .logo.mc { background: linear-gradient(135deg, #eb001b, #f79e1b); }
+
+  .card h3 { margin: 0; font-size: 17px; }
+  .card .sub { color: var(--muted); font-size: 13px; }
+  .card p { margin: 0; font-size: 14px; color: #1f2937; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .chip {
+    background: var(--chip); color: var(--chip-ink);
+    font-size: 11px; font-weight: 600;
+    padding: 4px 9px; border-radius: 999px;
+  }
+
+  /* Comparison table */
+  .tablewrap {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 980px; }
+  thead th {
+    text-align: left; font-size: 12px; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--muted);
+    background: #f9fafb;
+    padding: 14px 16px; border-bottom: 1px solid var(--line);
+    position: sticky; top: 0;
+  }
+  tbody td {
+    padding: 14px 16px; border-bottom: 1px solid var(--line);
+    vertical-align: top; font-size: 13.5px;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafafa; }
+  td.feat { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .yes { color: var(--ok); font-weight: 700; }
+  .no  { color: var(--bad); font-weight: 700; }
+  .mid { color: var(--warn); font-weight: 700; }
+
+  /* Fees panel */
+  .fees {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .fee {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .fee h4 { margin: 0 0 6px; font-size: 15px; }
+  .fee .price {
+    font-size: 22px; font-weight: 700;
+    background: linear-gradient(90deg, #4f46e5, #ec4899);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin: 6px 0;
+  }
+  .fee p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  /* Use cases for "us" */
+  .uses { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .use {
+    background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+    border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .use h4 { margin: 0 0 8px; font-size: 15px; display:flex; align-items:center; gap:8px; }
+  .use h4::before {
+    content: ""; width: 10px; height: 10px; border-radius: 3px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  }
+  .use ul { margin: 0; padding-left: 18px; color: #1f2937; font-size: 13.5px; }
+  .use li { margin-bottom: 5px; }
+
+  /* Footer note */
+  .note {
+    margin-top: 28px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+
+  /* TOC */
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0;
+  }
+  .toc a {
+    text-decoration: none; color: var(--ink);
+    border: 1px solid var(--line); background: #fff;
+    padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 500;
+    transition: all .15s ease;
+  }
+  .toc a:hover { border-color: var(--brand); color: var(--brand); }
+
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">Comparison · Agentic Commerce 2026</span>
+    <h1>Agentic Payment & Trust Protocols — Side by Side</h1>
+    <p>A practical look at the five frameworks shaping how AI agents discover, decide, and pay: Trusted Agents, Visa's Trusted Agent Protocol, Stripe's Agentic Commerce Suite, Stripe Projects, and Mastercard Agent Pay. Compare what they do, what they cost, and how we can plug them into our stack.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">5</div><div class="l">Frameworks compared</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Open standards / specs</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">Card-network programs</div></div>
+      <div class="stat"><div class="n">100%</div><div class="l">Tokenized payments</div></div>
+    </div>
+
+    <div class="toc">
+      <a href="#overview">Overview Cards</a>
+      <a href="#matrix">Feature Matrix</a>
+      <a href="#fees">Fees & Pricing</a>
+      <a href="#use">How We Can Use It</a>
+      <a href="#verdict">Verdict</a>
+    </div>
+  </section>
+
+  <!-- OVERVIEW CARDS -->
+  <h2 id="overview"><span class="pill">01</span> Overview</h2>
+  <section class="grid">
+
+    <article class="card">
+      <div class="card-head">
+        <div class="logo ta">TA</div>
+        <div>
+          <h3>Trusted Agents</h3>
+          <div class="sub">thetrustedagents.ai · Advisory & GTM</div>
+        </div>
+      </div>
+      <p>A consultancy / strategy practice helping product teams ship safe agentic features — identity, permissions, auditability, and go-to-market for delegated AI work.</p>
+      <div class="chips">
+        <span class="chip">Strategy</span><span class="chip">GTM</span><span class="chip">Delegation Design</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div class="logo visa">VISA</div>
+        <div>
+          <h3>Visa Trusted Agent Protocol</h3>
+          <div class="sub">developer.visa.com · Open Protocol (RFC 9421)</div>
+        </div>
+      </div>
+      <p>A cryptographic standard so merchants can verify the AI agent visiting their site is legitimate, not a scraper. Signs every request, binds it to merchant + page, time-limited and replay-proof.</p>
+      <div class="chips">
+        <span class="chip">HTTP Sigs</span><span class="chip">Merchant Trust</span><span class="chip">Open Source</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div class="logo stripe">S</div>
+        <div>
+          <h3>Stripe Agentic Commerce Suite</h3>
+          <div class="sub">docs.stripe.com/agents · Payments Platform</div>
+        </div>
+      </div>
+      <p>End-to-end stack for selling on agents: product feeds, Checkout Sessions API, Shared Payment Tokens (SPT), tax & shipping, fraud, plus order events back to your existing commerce stack.</p>
+      <div class="chips">
+        <span class="chip">SPT Tokens</span><span class="chip">Checkout API</span><span class="chip">Fraud + Tax</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div class="logo proj">SP</div>
+        <div>
+          <h3>Stripe Projects</h3>
+          <div class="sub">docs.stripe.com/projects · Dev CLI</div>
+        </div>
+      </div>
+      <p>CLI for agents (and devs) to provision DBs, auth, analytics, AI infra in your own provider accounts. Stores credentials in a vault, syncs env vars, and pays providers via Shared Payment Tokens.</p>
+      <div class="chips">
+        <span class="chip">CLI</span><span class="chip">Vault Creds</span><span class="chip">Pay-as-you-go</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div class="logo mc">MC</div>
+        <div>
+          <h3>Mastercard Agent Pay</h3>
+          <div class="sub">mastercard.com · Network Tokens</div>
+        </div>
+      </div>
+      <p>Card-network program where verified AI agents pay using <em>Agentic Tokens</em> — never raw PANs. Carries user-intent context to issuers, requires agent registration, full consumer consent controls.</p>
+      <div class="chips">
+        <span class="chip">Agentic Tokens</span><span class="chip">Issuer-aware</span><span class="chip">Consent Layer</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- MATRIX -->
+  <h2 id="matrix"><span class="pill">02</span> Feature Matrix</h2>
+  <div class="tablewrap">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Trusted Agents</th>
+            <th>Visa TAP</th>
+            <th>Stripe Agents</th>
+            <th>Stripe Projects</th>
+            <th>Mastercard Agent Pay</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feat">Type</td>
+            <td>Consultancy</td>
+            <td>Open Protocol</td>
+            <td>Payments Platform</td>
+            <td>Developer CLI</td>
+            <td>Network Program</td></tr>
+
+          <tr><td class="feat">Primary Function</td>
+            <td>Strategy & enablement for agentic products</td>
+            <td>Verify the agent at the merchant edge</td>
+            <td>Sell products through AI agents</td>
+            <td>Let agents provision & pay for infra</td>
+            <td>Tokenized payments by AI agents</td></tr>
+
+          <tr><td class="feat">Cryptographic Identity</td>
+            <td class="no">—</td>
+            <td class="yes">✓ HTTP Message Sigs (RFC 9421)</td>
+            <td class="mid">SPT scoping</td>
+            <td class="mid">SPT + vault</td>
+            <td class="yes">✓ Agentic Tokens</td></tr>
+
+          <tr><td class="feat">Replay / Misuse Protection</td>
+            <td class="no">—</td>
+            <td class="yes">✓ Time-bound, page-bound</td>
+            <td class="yes">✓ Per-session SPT</td>
+            <td class="yes">✓ Per-provider SPT</td>
+            <td class="yes">✓ Token cryptogram</td></tr>
+
+          <tr><td class="feat">Carries User Consent / Intent</td>
+            <td class="mid">Design pattern</td>
+            <td class="yes">✓ Consumer data fields</td>
+            <td class="yes">✓ Checkout Session</td>
+            <td class="mid">Plan upgrade only</td>
+            <td class="yes">✓ Rich context to issuer</td></tr>
+
+          <tr><td class="feat">Merchant Onboarding</td>
+            <td>—</td>
+            <td class="yes">Open spec, free</td>
+            <td class="yes">Stripe account + APIs</td>
+            <td class="no">Not merchant-facing</td>
+            <td class="mid">Through issuer / acquirer</td></tr>
+
+          <tr><td class="feat">Agent Registration</td>
+            <td>—</td>
+            <td>Self-signed allowed</td>
+            <td>Via Stripe</td>
+            <td>Via Stripe</td>
+            <td class="yes">Mandatory verification</td></tr>
+
+          <tr><td class="feat">Tax & Shipping</td>
+            <td class="no">—</td>
+            <td class="no">Out of scope</td>
+            <td class="yes">✓ Built-in (Stripe Tax)</td>
+            <td class="no">Out of scope</td>
+            <td class="no">Out of scope</td></tr>
+
+          <tr><td class="feat">Fraud Tooling</td>
+            <td class="no">—</td>
+            <td class="mid">Signal layer</td>
+            <td class="yes">✓ Radar + agent signals</td>
+            <td class="mid">Inherits Stripe</td>
+            <td class="yes">✓ Network risk engine</td></tr>
+
+          <tr><td class="feat">Open Source</td>
+            <td class="no">No</td>
+            <td class="yes">✓ on GitHub</td>
+            <td class="mid">Spec public</td>
+            <td class="no">Closed</td>
+            <td class="no">Closed</td></tr>
+
+          <tr><td class="feat">Best For</td>
+            <td>Teams designing agent UX</td>
+            <td>Any merchant on the open web</td>
+            <td>D2C / e-com brands</td>
+            <td>Devs building agent infra</td>
+            <td>Card-issuing banks & enterprises</td></tr>
+
+          <tr><td class="feat">Status (Apr 2026)</td>
+            <td class="yes">Active</td>
+            <td class="yes">GA + GitHub</td>
+            <td class="yes">GA, multi-platform</td>
+            <td class="yes">CLI public</td>
+            <td class="yes">Live with partners</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FEES -->
+  <h2 id="fees"><span class="pill">03</span> Fees & Pricing Model</h2>
+  <section class="fees">
+    <div class="fee">
+      <h4>Trusted Agents</h4>
+      <div class="price">Custom</div>
+      <p>Consulting engagements ("Expert Burst", GTM sprints). Priced per scope — no public rate card.</p>
+    </div>
+    <div class="fee">
+      <h4>Visa Trusted Agent Protocol</h4>
+      <div class="price">Free</div>
+      <p>Open protocol on GitHub & Visa Developer. No license fee. Standard Visa scheme fees still apply on settled transactions.</p>
+    </div>
+    <div class="fee">
+      <h4>Stripe Agentic Commerce Suite</h4>
+      <div class="price">Stripe rates</div>
+      <p>Standard Stripe processing (~2.9% + 30¢, region-varies). No new line item for agentic — uses existing Checkout / Tax / Radar pricing.</p>
+    </div>
+    <div class="fee">
+      <h4>Stripe Projects</h4>
+      <div class="price">Pass-through</div>
+      <p>Free CLI; you pay providers (DB / auth / analytics) at their rates via Shared Payment Token. Stripe takes no extra cut to provision.</p>
+    </div>
+    <div class="fee">
+      <h4>Mastercard Agent Pay</h4>
+      <div class="price">Network fees</div>
+      <p>Issuer-priced. No public agentic surcharge announced — runs on existing Mastercard interchange + tokenization infrastructure.</p>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <h2 id="use"><span class="pill">04</span> How We Can Use Each — Possibilities for Our Stack</h2>
+  <section class="uses">
+
+    <div class="use">
+      <h4>Trusted Agents — as a playbook</h4>
+      <ul>
+        <li>Borrow their delegation / consent UX patterns for our agent flows.</li>
+        <li>Use their framing for risk reviews with legal & compliance.</li>
+        <li>Reference their GTM playbook when launching agent-facing SKUs.</li>
+      </ul>
+    </div>
+
+    <div class="use">
+      <h4>Visa TAP — at our merchant edge</h4>
+      <ul>
+        <li>Adopt the open spec on our checkout / API edge so trusted bots aren't blocked by WAFs.</li>
+        <li>Verify signatures to grant agents lower friction (no CAPTCHA, no rate-limit) while bouncing scrapers.</li>
+        <li>Pair with our existing analytics to measure agent-driven traffic separately.</li>
+      </ul>
+    </div>
+
+    <div class="use">
+      <h4>Stripe Agents — sell through agents</h4>
+      <ul>
+        <li>Push our catalog as a product feed to ChatGPT / Claude / Perplexity surfaces.</li>
+        <li>Use Checkout Sessions + SPT so the agent completes purchase without leaving the chat.</li>
+        <li>Receive order events into the same fulfillment pipeline we use today.</li>
+      </ul>
+    </div>
+
+    <div class="use">
+      <h4>Stripe Projects — agent-built infra</h4>
+      <ul>
+        <li>Let our internal Claude / Cowork agents spin up DBs and auth without us pasting API keys.</li>
+        <li>Centralize provider credentials in the Stripe vault — fewer .env files leaking.</li>
+        <li>Use SPT-based upgrades so the agent can move from free → paid tier on its own budget.</li>
+      </ul>
+    </div>
+
+    <div class="use">
+      <h4>Mastercard Agent Pay — issuer-grade payments</h4>
+      <ul>
+        <li>If we issue cards (e.g., corporate / virtual), enroll them as Agentic Tokens for B2B procurement bots.</li>
+        <li>Pass user-intent context with each transaction → better issuer approval rates on agent purchases.</li>
+        <li>Use the consent layer to set per-agent spend caps & merchant allowlists.</li>
+      </ul>
+    </div>
+
+    <div class="use">
+      <h4>Combined stack — recommended architecture</h4>
+      <ul>
+        <li><strong>Edge:</strong> Visa TAP to verify the agent.</li>
+        <li><strong>Commerce:</strong> Stripe Agents for catalog + checkout.</li>
+        <li><strong>Payment rail:</strong> Mastercard Agent Pay tokens where the issuer supports them.</li>
+        <li><strong>Internal infra:</strong> Stripe Projects for our own agent-driven ops.</li>
+        <li><strong>Strategy:</strong> Trusted Agents patterns for governance.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- VERDICT -->
+  <h2 id="verdict"><span class="pill">05</span> Verdict — Quick Reads</h2>
+  <section class="grid">
+    <div class="card"><h3>Pick Visa TAP if…</h3><p>You want a free, open, standards-based way to tell good bots from bad on your own site — the cheapest insurance against being either scraped or accidentally blocking real customers.</p></div>
+    <div class="card"><h3>Pick Stripe Agents if…</h3><p>You're already on Stripe and want the fastest path to selling inside ChatGPT-style agents without rebuilding checkout, tax, and fraud.</p></div>
+    <div class="card"><h3>Pick Stripe Projects if…</h3><p>Your developers (or AI agents) keep needing to spin up infra — and you'd rather pay providers via a vaulted token than juggle 12 billing portals.</p></div>
+    <div class="card"><h3>Pick Mastercard Agent Pay if…</h3><p>You're a bank, fintech, or large enterprise and need issuer-side controls + risk scoring on AI-initiated payments — not just merchant-side ones.</p></div>
+    <div class="card"><h3>Pick Trusted Agents if…</h3><p>You need senior strategy partners to help frame the agentic roadmap — not a piece of code, but a way to think about delegation, trust, and rollout.</p></div>
+  </section>
+
+  <p class="note">Note: This is a structured comparison built from public documentation as of April 2026. Pricing on processing networks (Stripe, Mastercard) varies by region, MCC, and contract — confirm with your account manager before signing off.</p>
+
+</div>
+</body>
+</html>
