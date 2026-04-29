@@ -27,6 +27,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
     background: var(--bg); color: var(--ink); line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
   }
   .page { max-width: 1320px; margin: 0 auto; }
 
@@ -92,7 +93,11 @@
     background: var(--panel); border: 1px solid var(--line);
     border-radius: 14px; overflow: hidden; box-shadow: var(--shadow);
   }
-  .table-scroll { overflow-x: auto; }
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
   table { width: 100%; border-collapse: collapse; min-width: 1240px; }
   thead th {
     text-align: left; font-size: 10.5px; text-transform: uppercase;
@@ -173,10 +178,82 @@
   footer a { color: var(--brand); text-decoration: none; margin-right: 4px; }
   footer .brand { font-weight: 600; color: var(--ink); }
 
-  @media (max-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 760px) {
-    .grid { grid-template-columns: 1fr; }
+  /* Swipe hint for the table on touch devices */
+  .swipe-hint {
+    display: none;
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin: 6px 0 8px;
+    font-style: italic;
+  }
+
+  /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+  /* Large tablet / small desktop */
+  @media (max-width: 1200px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
     .stance { grid-template-columns: 1fr; }
+    h2 { font-size: 17px; margin: 28px 0 12px; }
+    .swipe-hint { display: block; }
+  }
+
+  /* Phone */
+  @media (max-width: 640px) {
+    body { padding: 18px 14px 48px; }
+    .page { width: 100%; }
+    h1 { font-size: 24px; }
+    .lede { font-size: 14px; }
+    .eyebrow { font-size: 10.5px; padding: 4px 10px; }
+
+    .grid { grid-template-columns: 1fr; gap: 10px; }
+    .card { padding: 14px; }
+    .card h3 { font-size: 14.5px; }
+    .card .one { font-size: 13px; }
+    .badge { width: 36px; height: 36px; font-size: 11px; }
+
+    /* Table: keep horizontal scroll, make first column sticky for orientation */
+    .tablewrap { border-radius: 12px; }
+    table { min-width: 880px; }
+    thead th, tbody td { padding: 10px 10px; font-size: 11.5px; }
+    td.feat {
+      position: sticky; left: 0; z-index: 2;
+      box-shadow: 1px 0 0 var(--line-2);
+      max-width: 130px; white-space: normal;
+    }
+    thead th:first-child {
+      position: sticky; left: 0; z-index: 3;
+      background: #f9fafb;
+      box-shadow: 1px 0 0 var(--line);
+    }
+    tbody tr.section td:first-child {
+      position: sticky; left: 0; z-index: 2;
+      background: #fafafa;
+    }
+
+    /* Verun stance — stacked, padding tighter */
+    .verun-box { padding: 16px; }
+    .verun-box h3 { font-size: 15px; }
+    .row-stance {
+      flex-direction: column; gap: 6px;
+      padding: 12px 14px;
+    }
+    .row-stance .name { min-width: 0; font-size: 13px; }
+    .row-stance .desc { font-size: 12.5px; }
+    .row-stance .verdict { align-self: flex-start; }
+
+    footer { font-size: 11.5px; }
+  }
+
+  /* Tiny phone */
+  @media (max-width: 380px) {
+    h1 { font-size: 21px; }
+    .badge { width: 32px; height: 32px; }
   }
 </style>
 </head>
@@ -271,6 +348,7 @@
 
   <!-- SECTION 2: TABLE -->
   <h2><span class="num">02</span> Side-by-Side Comparison</h2>
+  <p class="swipe-hint">← swipe table to see all columns →</p>
   <div class="tablewrap">
     <div class="table-scroll">
       <table>
