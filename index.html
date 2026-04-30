@@ -69,7 +69,7 @@
     display: grid; place-items: center; color: #fff;
     font-size: 11px; font-weight: 700; flex-shrink: 0;
   }
-  .b1 { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+  .b1 { background: linear-gradient(135deg, #1f2937, #4b5563); }
   .b2 { background: linear-gradient(135deg, #1a1f71, #3b82f6); }
   .b3 { background: linear-gradient(135deg, #635bff, #a855f7); }
   .b4 { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
@@ -112,7 +112,7 @@
     font-size: 9.5px; padding: 2px 7px; border-radius: 999px;
     font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
   }
-  .p1 { background: #e0f2fe; color: #075985; }
+  .p1 { background: #f3f4f6; color: #1f2937; }
   .p2 { background: #dbeafe; color: #1e40af; }
   .p3 { background: #ede9fe; color: #5b21b6; }
   .p4 { background: #cffafe; color: #155e75; }
@@ -274,14 +274,14 @@
 
     <article class="card">
       <div class="card-top">
-        <div class="badge b1">TA</div>
+        <div class="badge b1">OKX</div>
         <div>
-          <div class="role">Strategy</div>
-          <h3>Trusted Agents</h3>
-          <div class="vendor">thetrustedagents.ai</div>
+          <div class="role">Agent-to-Agent</div>
+          <h3>OKX Agent Payments Protocol</h3>
+          <div class="vendor">okx.com / X Layer</div>
         </div>
       </div>
-      <p class="one">Advisory practice for agent UX, identity, governance, GTM.</p>
+      <p class="one">Open standard for full agent commerce — quote, negotiate, escrow, settle, dispute. Stablecoin payments on X Layer (~5000 TPS, sub-cent fees).</p>
     </article>
 
     <article class="card">
@@ -355,7 +355,7 @@
         <thead>
           <tr>
             <th style="width: 180px;">Capability</th>
-            <th class="col-head">Trusted Agents<br><span class="pill p1">Strategy</span></th>
+            <th class="col-head">OKX APP<br><span class="pill p1">Agent-to-Agent</span></th>
             <th class="col-head">Visa TAP<br><span class="pill p2">Edge Trust</span></th>
             <th class="col-head">Stripe Agents<br><span class="pill p3">Sell-Side</span></th>
             <th class="col-head">Stripe Projects<br><span class="pill p4">Dev Infra</span></th>
@@ -367,21 +367,21 @@
 
           <tr class="section"><td colspan="7">Basics</td></tr>
           <tr><td class="feat">Type</td>
-            <td>Consultancy</td>
+            <td>Open Protocol + SDK</td>
             <td>Open Protocol</td>
             <td>Payments Platform</td>
             <td>Developer CLI</td>
             <td>Network Program</td>
             <td>Open Protocol + Facilitator</td></tr>
           <tr><td class="feat">Primary Function</td>
-            <td>Strategy &amp; enablement</td>
+            <td>Full agent commerce: quote → escrow → settle → dispute</td>
             <td>Verify agent at merchant edge</td>
             <td>Sell products via AI agents</td>
             <td>Provision &amp; pay for infra</td>
             <td>Tokenized card payments</td>
             <td>Per-request stablecoin payments</td></tr>
           <tr><td class="feat">Best For</td>
-            <td>Teams designing agent UX</td>
+            <td>Agent-to-agent B2B commerce</td>
             <td>Any merchant on open web</td>
             <td>D2C / e-commerce brands</td>
             <td>Devs building agent infra</td>
@@ -390,28 +390,28 @@
 
           <tr class="section"><td colspan="7">Underlying Technology</td></tr>
           <tr><td class="feat">Core Mechanism</td>
-            <td>Frameworks &amp; playbooks</td>
+            <td>Wallet + SDK + protocol layer; X Layer settlement, TEE-secured session keys</td>
             <td>HTTP Message Sigs (RFC 9421)</td>
             <td>Shared Payment Tokens (SPT) + Checkout</td>
             <td>Vaulted creds + SPT billing</td>
             <td>Agentic Tokens + KYA scoring</td>
             <td>HTTP 402 + on-chain settlement (USDC/EURC)</td></tr>
           <tr><td class="feat">Cryptographic ID</td>
-            <td class="no">—</td>
+            <td class="yes">✓ Session keys + on-chain signing</td>
             <td class="yes">✓ Per-request signature</td>
             <td class="yes">✓ Scoped SPT</td>
             <td class="yes">✓ Vault + SPT</td>
             <td class="yes">✓ Tokenized card</td>
             <td class="yes">✓ Wallet signature on-chain</td></tr>
           <tr><td class="feat">Risk / Trust Score</td>
-            <td class="no">—</td>
+            <td class="mid">On-chain history + escrow + dispute</td>
             <td class="mid">Signal layer only</td>
             <td class="yes">Stripe Radar</td>
             <td class="mid">Inherits Stripe</td>
             <td class="yes">KYA — 4-tier classification</td>
             <td class="mid">On-chain history (wallet age, TXs)</td></tr>
           <tr><td class="feat">Open Source</td>
-            <td class="no">No</td>
+            <td class="yes">✓ Open standard, multi-chain</td>
             <td class="yes">✓ visa/trusted-agent-protocol</td>
             <td class="mid">Spec public</td>
             <td class="no">Closed</td>
@@ -420,14 +420,14 @@
 
           <tr class="section"><td colspan="7">Fees &amp; Pricing</td></tr>
           <tr><td class="feat">Pricing Model</td>
-            <td><span class="fee-tag">Custom $$</span></td>
+            <td><span class="fee-tag">Sub-cent gas</span></td>
             <td><span class="fee-tag">Free / Open</span></td>
             <td><span class="fee-tag">~2.9% + 30¢</span></td>
             <td><span class="fee-tag">Pass-through</span></td>
             <td><span class="fee-tag">Network fees</span></td>
             <td><span class="fee-tag">Gas + facilitator fee</span></td></tr>
           <tr><td class="feat">Notes</td>
-            <td>Per-scope engagement</td>
+            <td>0-gas USDT/USDC on X Layer; broker fees separate</td>
             <td>No license fee</td>
             <td>Standard Stripe</td>
             <td>Free CLI; pay providers</td>
@@ -436,21 +436,21 @@
 
           <tr class="section"><td colspan="7">Integration &amp; Adoption</td></tr>
           <tr><td class="feat">How to Integrate</td>
-            <td>Consulting sprints</td>
+            <td>OKX Payment SDK + Agentic Wallet</td>
             <td>Spec into edge / WAF</td>
             <td>Stripe Dashboard / API</td>
             <td><code>stripe project add</code></td>
             <td>Through issuer / acquirer</td>
             <td>Add 402 response + facilitator endpoint</td></tr>
           <tr><td class="feat">Regulated EU Finance</td>
-            <td class="no">—</td>
+            <td class="mid">Multi-chain — usable for non-securities flows</td>
             <td class="mid">Generic</td>
             <td class="no">Retail commerce only</td>
             <td class="no">Out of scope</td>
             <td class="mid">Issuer-dependent</td>
             <td class="yes">Algorand → eWpG / MiCA path</td></tr>
           <tr><td class="feat">Status (Apr 2026)</td>
-            <td class="yes">Active</td>
+            <td class="yes">Live (April 2026)</td>
             <td class="yes">GA + GitHub</td>
             <td class="yes">GA</td>
             <td class="yes">CLI public</td>
@@ -459,14 +459,14 @@
 
           <tr class="section"><td colspan="7">Verifiable Signal Output (for trust aggregation)</td></tr>
           <tr><td class="feat">Emits Identity Signal?</td>
-            <td class="signal-no no">No</td>
+            <td class="signal-yes yes">✓ Wallet + escrow + dispute history</td>
             <td class="signal-yes yes">✓ Crypto signature per request</td>
             <td class="signal-mid mid">SPT scope (per session)</td>
             <td class="signal-mid mid">SPT (provider-scoped)</td>
             <td class="signal-yes yes">✓ KYA tier (1–4)</td>
             <td class="signal-yes yes">✓ Wallet + on-chain history</td></tr>
           <tr><td class="feat">Aggregable into a Score?</td>
-            <td class="signal-no no">No</td>
+            <td class="signal-yes yes">✓ Yes — agent reputation + dispute</td>
             <td class="signal-yes yes">✓ Yes — boolean validity</td>
             <td class="signal-mid mid">Indirect (Radar)</td>
             <td class="signal-no no">No</td>
@@ -497,6 +497,11 @@
         <span class="verdict v-ingest">Ingest</span>
       </div>
       <div class="row-stance">
+        <div class="name">OKX Agent Payments Protocol</div>
+        <div class="desc">Agent-to-agent settlement, escrow, and dispute history → strong reputation signal; X Layer can co-exist with Algorand for non-securities flows.</div>
+        <span class="verdict v-ingest">Ingest</span>
+      </div>
+      <div class="row-stance">
         <div class="name">x402 + GoPlausible</div>
         <div class="desc">Algorand-native payment rail — wallet history + on-chain reputation as inputs; payment gate on accredited operations.</div>
         <span class="verdict v-ingest">Ingest + Settle</span>
@@ -511,18 +516,13 @@
         <div class="desc">Internal dev infra only. Not part of the agent-trust flow.</div>
         <span class="verdict v-skip">Skip</span>
       </div>
-      <div class="row-stance">
-        <div class="name">Trusted Agents (advisory)</div>
-        <div class="desc">Verun <em>is</em> the trust layer — overlap, not dependency. Useful as governance design reference.</div>
-        <span class="verdict v-skip">Skip</span>
-      </div>
     </div>
   </div>
 
   <footer>
     <span class="brand">Verun Protocol</span> · BCP Partners GmbH · Berlin · 2026<br>
     Sources:
-    <a href="https://thetrustedagents.ai/" target="_blank" rel="noopener">Trusted Agents</a> ·
+    <a href="https://www.okx.com/learn/agent-payments-protocol" target="_blank" rel="noopener">OKX APP</a> ·
     <a href="https://developer.visa.com/capabilities/trusted-agent-protocol/overview" target="_blank" rel="noopener">Visa TAP</a> ·
     <a href="https://docs.stripe.com/agents" target="_blank" rel="noopener">Stripe Agents</a> ·
     <a href="https://docs.stripe.com/projects" target="_blank" rel="noopener">Stripe Projects</a> ·
