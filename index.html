@@ -53,7 +53,7 @@
   }
 
   /* CARDS */
-  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 9px; }
   .card {
     background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
     padding: 14px; display: flex; flex-direction: column; gap: 6px;
@@ -75,6 +75,7 @@
   .b4 { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
   .b5 { background: linear-gradient(135deg, #eb001b, #f79e1b); }
   .b6 { background: linear-gradient(135deg, #10b981, #0ea5e9); }
+  .b7 { background: linear-gradient(135deg, #f59e0b, #d97706); }
   .role {
     font-size: 9.5px; color: var(--muted); text-transform: uppercase;
     font-weight: 600; letter-spacing: .08em;
@@ -98,7 +99,7 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
   }
-  table { width: 100%; border-collapse: collapse; min-width: 1240px; }
+  table { width: 100%; border-collapse: collapse; min-width: 1400px; }
   thead th {
     text-align: left; font-size: 10.5px; text-transform: uppercase;
     letter-spacing: .07em; color: var(--muted); font-weight: 700;
@@ -118,6 +119,7 @@
   .p4 { background: #cffafe; color: #155e75; }
   .p5 { background: #fff7ed; color: #9a3412; }
   .p6 { background: #d1fae5; color: #065f46; }
+  .p7 { background: #fef3c7; color: #92400e; }
   tbody td {
     padding: 11px 12px; border-bottom: 1px solid var(--line-2);
     vertical-align: top; font-size: 12px; line-height: 1.45;
@@ -191,7 +193,10 @@
   /* ===== RESPONSIVE BREAKPOINTS ===== */
 
   /* Large tablet / small desktop */
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 1050px) {
     .grid { grid-template-columns: repeat(3, 1fr); }
   }
 
@@ -219,7 +224,7 @@
 
     /* Table: keep horizontal scroll, make first column sticky for orientation */
     .tablewrap { border-radius: 12px; }
-    table { min-width: 880px; }
+    table { min-width: 1000px; }
     thead th, tbody td { padding: 10px 10px; font-size: 11.5px; }
     td.feat {
       position: sticky; left: 0; z-index: 2;
@@ -261,16 +266,28 @@
 <div class="page">
 
   <header>
-    <span class="eyebrow">Agentic Commerce Landscape · April 2026</span>
+    <span class="eyebrow">Agentic Commerce Landscape · May 2026</span>
     <h1>Agent Trust & Payment Frameworks — Comparison</h1>
     <p class="lede">
-      Six frameworks defining how AI agents are identified, trusted, and paid. Side-by-side: tech, fees, integration model, and — critically — what verifiable signal each emits that a trust-aggregator layer can ingest.
+      Seven frameworks defining how AI agents are identified, trusted, and paid. Side-by-side: tech, fees, integration model, and — critically — what verifiable signal each emits that a trust-aggregator layer can ingest.
     </p>
   </header>
 
   <!-- SECTION 1: CARDS -->
   <h2><span class="num">01</span> The Frameworks</h2>
   <section class="grid">
+
+    <article class="card highlight">
+      <div class="card-top">
+        <div class="badge b7">BB</div>
+        <div>
+          <div class="role">Asset Issuance <span class="new-tag">New</span></div>
+          <h3>Bitbond Token Tool MCP</h3>
+          <div class="vendor">bitbond.com · BaFin / Berlin</div>
+        </div>
+      </div>
+      <p class="one">Open-source MCP server. AI agents (Claude, Cursor, Windsurf) deploy compliant ERC20/ERC1400 tokens via natural language. CertiK-audited.</p>
+    </article>
 
     <article class="card">
       <div class="card-top">
@@ -298,30 +315,6 @@
 
     <article class="card">
       <div class="card-top">
-        <div class="badge b3">S</div>
-        <div>
-          <div class="role">Sell-Side</div>
-          <h3>Stripe Agentic Commerce</h3>
-          <div class="vendor">docs.stripe.com/agents</div>
-        </div>
-      </div>
-      <p class="one">Stack to sell products inside AI agents — feed, checkout, payment.</p>
-    </article>
-
-    <article class="card">
-      <div class="card-top">
-        <div class="badge b4">SP</div>
-        <div>
-          <div class="role">Dev Infra</div>
-          <h3>Stripe Projects</h3>
-          <div class="vendor">docs.stripe.com/projects</div>
-        </div>
-      </div>
-      <p class="one">CLI for agents to provision DBs, auth, analytics &amp; pay providers.</p>
-    </article>
-
-    <article class="card">
-      <div class="card-top">
         <div class="badge b5">MC</div>
         <div>
           <div class="role">Card Rail</div>
@@ -344,6 +337,30 @@
       <p class="one">HTTP 402 "Payment Required" protocol. Stablecoin micropayments per request, Algorand-native facilitator available.</p>
     </article>
 
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b3">S</div>
+        <div>
+          <div class="role">Sell-Side</div>
+          <h3>Stripe Agentic Commerce</h3>
+          <div class="vendor">docs.stripe.com/agents</div>
+        </div>
+      </div>
+      <p class="one">Stack to sell products inside AI agents — feed, checkout, payment.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="badge b4">SP</div>
+        <div>
+          <div class="role">Dev Infra</div>
+          <h3>Stripe Projects</h3>
+          <div class="vendor">docs.stripe.com/projects</div>
+        </div>
+      </div>
+      <p class="one">CLI for agents to provision DBs, auth, analytics &amp; pay providers.</p>
+    </article>
+
   </section>
 
   <!-- SECTION 2: TABLE -->
@@ -355,123 +372,138 @@
         <thead>
           <tr>
             <th style="width: 180px;">Capability</th>
+            <th class="col-head">Bitbond Token Tool MCP<br><span class="pill p7">Asset Issuance</span></th>
             <th class="col-head">OKX APP<br><span class="pill p1">Agent-to-Agent</span></th>
             <th class="col-head">Visa TAP<br><span class="pill p2">Edge Trust</span></th>
-            <th class="col-head">Stripe Agents<br><span class="pill p3">Sell-Side</span></th>
-            <th class="col-head">Stripe Projects<br><span class="pill p4">Dev Infra</span></th>
             <th class="col-head">MC Agent Pay<br><span class="pill p5">Card Rail</span></th>
             <th class="col-head">x402 + GoPlausible<br><span class="pill p6">Crypto-Native</span></th>
+            <th class="col-head">Stripe Agents<br><span class="pill p3">Sell-Side</span></th>
+            <th class="col-head">Stripe Projects<br><span class="pill p4">Dev Infra</span></th>
           </tr>
         </thead>
         <tbody>
 
-          <tr class="section"><td colspan="7">Basics</td></tr>
+          <tr class="section"><td colspan="8">Basics</td></tr>
           <tr><td class="feat">Type</td>
+            <td>Open-Source MCP Server</td>
             <td>Open Protocol + SDK</td>
             <td>Open Protocol</td>
-            <td>Payments Platform</td>
-            <td>Developer CLI</td>
             <td>Network Program</td>
-            <td>Open Protocol + Facilitator</td></tr>
+            <td>Open Protocol + Facilitator</td>
+            <td>Payments Platform</td>
+            <td>Developer CLI</td></tr>
           <tr><td class="feat">Primary Function</td>
+            <td>Agents deploy compliant tokens via natural language</td>
             <td>Full agent commerce: quote → escrow → settle → dispute</td>
             <td>Verify agent at merchant edge</td>
-            <td>Sell products via AI agents</td>
-            <td>Provision &amp; pay for infra</td>
             <td>Tokenized card payments</td>
-            <td>Per-request stablecoin payments</td></tr>
+            <td>Per-request stablecoin payments</td>
+            <td>Sell products via AI agents</td>
+            <td>Provision &amp; pay for infra</td></tr>
           <tr><td class="feat">Best For</td>
+            <td>Tokenized securities, bonds, RWAs (EU)</td>
             <td>Agent-to-agent B2B commerce</td>
             <td>Any merchant on open web</td>
-            <td>D2C / e-commerce brands</td>
-            <td>Devs building agent infra</td>
             <td>Card-issuing banks</td>
-            <td>Web3 / API monetization</td></tr>
+            <td>Web3 / API monetization</td>
+            <td>D2C / e-commerce brands</td>
+            <td>Devs building agent infra</td></tr>
 
-          <tr class="section"><td colspan="7">Underlying Technology</td></tr>
+          <tr class="section"><td colspan="8">Underlying Technology</td></tr>
           <tr><td class="feat">Core Mechanism</td>
+            <td>MCP server → Bitbond Token Tool API → ERC20/ERC1400 contracts</td>
             <td>Wallet + SDK + protocol layer; X Layer settlement, TEE-secured session keys</td>
             <td>HTTP Message Sigs (RFC 9421)</td>
-            <td>Shared Payment Tokens (SPT) + Checkout</td>
-            <td>Vaulted creds + SPT billing</td>
             <td>Agentic Tokens + KYA scoring</td>
-            <td>HTTP 402 + on-chain settlement (USDC/EURC)</td></tr>
+            <td>HTTP 402 + on-chain settlement (USDC/EURC)</td>
+            <td>Shared Payment Tokens (SPT) + Checkout</td>
+            <td>Vaulted creds + SPT billing</td></tr>
           <tr><td class="feat">Cryptographic ID</td>
+            <td class="yes">✓ Local private key (env var, never transmitted)</td>
             <td class="yes">✓ Session keys + on-chain signing</td>
             <td class="yes">✓ Per-request signature</td>
-            <td class="yes">✓ Scoped SPT</td>
-            <td class="yes">✓ Vault + SPT</td>
             <td class="yes">✓ Tokenized card</td>
-            <td class="yes">✓ Wallet signature on-chain</td></tr>
+            <td class="yes">✓ Wallet signature on-chain</td>
+            <td class="yes">✓ Scoped SPT</td>
+            <td class="yes">✓ Vault + SPT</td></tr>
           <tr><td class="feat">Risk / Trust Score</td>
+            <td class="yes">CertiK + AuditOne audited contracts</td>
             <td class="mid">On-chain history + escrow + dispute</td>
             <td class="mid">Signal layer only</td>
-            <td class="yes">Stripe Radar</td>
-            <td class="mid">Inherits Stripe</td>
             <td class="yes">KYA — 4-tier classification</td>
-            <td class="mid">On-chain history (wallet age, TXs)</td></tr>
+            <td class="mid">On-chain history (wallet age, TXs)</td>
+            <td class="yes">Stripe Radar</td>
+            <td class="mid">Inherits Stripe</td></tr>
           <tr><td class="feat">Open Source</td>
+            <td class="yes">✓ bitbond/token-tool-mcp on GitHub</td>
             <td class="yes">✓ Open standard, multi-chain</td>
             <td class="yes">✓ visa/trusted-agent-protocol</td>
+            <td class="no">Closed</td>
+            <td class="yes">✓ x402 spec + GoPlausible facilitator</td>
             <td class="mid">Spec public</td>
-            <td class="no">Closed</td>
-            <td class="no">Closed</td>
-            <td class="yes">✓ x402 spec + GoPlausible facilitator</td></tr>
+            <td class="no">Closed</td></tr>
 
-          <tr class="section"><td colspan="7">Fees &amp; Pricing</td></tr>
+          <tr class="section"><td colspan="8">Fees &amp; Pricing</td></tr>
           <tr><td class="feat">Pricing Model</td>
+            <td><span class="fee-tag">$299 / deployment</span></td>
             <td><span class="fee-tag">Sub-cent gas</span></td>
             <td><span class="fee-tag">Free / Open</span></td>
-            <td><span class="fee-tag">~2.9% + 30¢</span></td>
-            <td><span class="fee-tag">Pass-through</span></td>
             <td><span class="fee-tag">Network fees</span></td>
-            <td><span class="fee-tag">Gas + facilitator fee</span></td></tr>
+            <td><span class="fee-tag">Gas + facilitator fee</span></td>
+            <td><span class="fee-tag">~2.9% + 30¢</span></td>
+            <td><span class="fee-tag">Pass-through</span></td></tr>
           <tr><td class="feat">Notes</td>
+            <td>Free testnet (Sepolia, Base Sepolia); $299 mainnet</td>
             <td>0-gas USDT/USDC on X Layer; broker fees separate</td>
             <td>No license fee</td>
-            <td>Standard Stripe</td>
-            <td>Free CLI; pay providers</td>
             <td>Issuer-priced</td>
-            <td>Sub-cent on Algorand; no card processor</td></tr>
+            <td>Sub-cent on Algorand; no card processor</td>
+            <td>Standard Stripe</td>
+            <td>Free CLI; pay providers</td></tr>
 
-          <tr class="section"><td colspan="7">Integration &amp; Adoption</td></tr>
+          <tr class="section"><td colspan="8">Integration &amp; Adoption</td></tr>
           <tr><td class="feat">How to Integrate</td>
+            <td><code>npm install</code> MCP server, plug into Claude / Cursor / Windsurf</td>
             <td>OKX Payment SDK + Agentic Wallet</td>
             <td>Spec into edge / WAF</td>
-            <td>Stripe Dashboard / API</td>
-            <td><code>stripe project add</code></td>
             <td>Through issuer / acquirer</td>
-            <td>Add 402 response + facilitator endpoint</td></tr>
+            <td>Add 402 response + facilitator endpoint</td>
+            <td>Stripe Dashboard / API</td>
+            <td><code>stripe project add</code></td></tr>
           <tr><td class="feat">Regulated EU Finance</td>
+            <td class="yes">✓ BaFin-experienced, ERC1400 native, Berlin-based</td>
             <td class="mid">Multi-chain — usable for non-securities flows</td>
             <td class="mid">Generic</td>
-            <td class="no">Retail commerce only</td>
-            <td class="no">Out of scope</td>
             <td class="mid">Issuer-dependent</td>
-            <td class="yes">Algorand → eWpG / MiCA path</td></tr>
-          <tr><td class="feat">Status (Apr 2026)</td>
-            <td class="yes">Live (April 2026)</td>
+            <td class="yes">Algorand → eWpG / MiCA path</td>
+            <td class="no">Retail commerce only</td>
+            <td class="no">Out of scope</td></tr>
+          <tr><td class="feat">Status (May 2026)</td>
+            <td class="yes">Live; 8,300+ deployments on TokenTool</td>
+            <td class="yes">Live</td>
             <td class="yes">GA + GitHub</td>
-            <td class="yes">GA</td>
-            <td class="yes">CLI public</td>
             <td class="yes">Live with partners</td>
-            <td class="yes">Live; Algorand facilitator (GoPlausible) in beta</td></tr>
+            <td class="yes">Live; GoPlausible facilitator in beta</td>
+            <td class="yes">GA</td>
+            <td class="yes">CLI public</td></tr>
 
-          <tr class="section"><td colspan="7">Verifiable Signal Output (for trust aggregation)</td></tr>
+          <tr class="section"><td colspan="8">Verifiable Signal Output (for trust aggregation)</td></tr>
           <tr><td class="feat">Emits Identity Signal?</td>
+            <td class="signal-yes yes">✓ Deployer wallet + audit trail</td>
             <td class="signal-yes yes">✓ Wallet + escrow + dispute history</td>
             <td class="signal-yes yes">✓ Crypto signature per request</td>
-            <td class="signal-mid mid">SPT scope (per session)</td>
-            <td class="signal-mid mid">SPT (provider-scoped)</td>
             <td class="signal-yes yes">✓ KYA tier (1–4)</td>
-            <td class="signal-yes yes">✓ Wallet + on-chain history</td></tr>
+            <td class="signal-yes yes">✓ Wallet + on-chain history</td>
+            <td class="signal-mid mid">SPT scope (per session)</td>
+            <td class="signal-mid mid">SPT (provider-scoped)</td></tr>
           <tr><td class="feat">Aggregable into a Score?</td>
+            <td class="signal-yes yes">✓ Yes — deployment history + compliance flags</td>
             <td class="signal-yes yes">✓ Yes — agent reputation + dispute</td>
             <td class="signal-yes yes">✓ Yes — boolean validity</td>
-            <td class="signal-mid mid">Indirect (Radar)</td>
-            <td class="signal-no no">No</td>
             <td class="signal-yes yes">✓ Yes — direct numeric</td>
-            <td class="signal-yes yes">✓ Yes — wallet reputation</td></tr>
+            <td class="signal-yes yes">✓ Yes — wallet reputation</td>
+            <td class="signal-mid mid">Indirect (Radar)</td>
+            <td class="signal-no no">No</td></tr>
 
         </tbody>
       </table>
@@ -487,6 +519,16 @@
     </p>
     <div class="stance">
       <div class="row-stance">
+        <div class="name">Bitbond Token Tool MCP</div>
+        <div class="desc">BaFin-experienced, Berlin-based, ERC1400 native — direct fit for tokenforge gate. Agents can mint compliant securities; Verun gates the deploy via score.</div>
+        <span class="verdict v-ingest">Integrate</span>
+      </div>
+      <div class="row-stance">
+        <div class="name">OKX Agent Payments Protocol</div>
+        <div class="desc">Agent-to-agent settlement, escrow, and dispute history → strong reputation signal; X Layer can co-exist with Algorand for non-securities flows.</div>
+        <span class="verdict v-ingest">Ingest</span>
+      </div>
+      <div class="row-stance">
         <div class="name">Visa TAP</div>
         <div class="desc">Cryptographic-signature signal feeds directly into the Verun score as a verifiable identity input.</div>
         <span class="verdict v-ingest">Ingest</span>
@@ -494,11 +536,6 @@
       <div class="row-stance">
         <div class="name">MC Agent Pay (KYA)</div>
         <div class="desc">4-tier KYA classification maps cleanly to Verun's tier model (LOW / MED / HIGH / BLOCK).</div>
-        <span class="verdict v-ingest">Ingest</span>
-      </div>
-      <div class="row-stance">
-        <div class="name">OKX Agent Payments Protocol</div>
-        <div class="desc">Agent-to-agent settlement, escrow, and dispute history → strong reputation signal; X Layer can co-exist with Algorand for non-securities flows.</div>
         <span class="verdict v-ingest">Ingest</span>
       </div>
       <div class="row-stance">
@@ -522,13 +559,15 @@
   <footer>
     <span class="brand">Verun Protocol</span> · BCP Partners GmbH · Berlin · 2026<br>
     Sources:
+    <a href="https://www.bitbond.com" target="_blank" rel="noopener">Bitbond</a> ·
+    <a href="https://github.com/bitbond/token-tool-mcp" target="_blank" rel="noopener">Token Tool MCP</a> ·
     <a href="https://www.okx.com/learn/agent-payments-protocol" target="_blank" rel="noopener">OKX APP</a> ·
     <a href="https://developer.visa.com/capabilities/trusted-agent-protocol/overview" target="_blank" rel="noopener">Visa TAP</a> ·
-    <a href="https://docs.stripe.com/agents" target="_blank" rel="noopener">Stripe Agents</a> ·
-    <a href="https://docs.stripe.com/projects" target="_blank" rel="noopener">Stripe Projects</a> ·
     <a href="https://www.mastercard.com/us/en/business/artificial-intelligence/mastercard-agent-pay.html" target="_blank" rel="noopener">Mastercard Agent Pay</a> ·
     <a href="https://www.x402.org" target="_blank" rel="noopener">x402</a> ·
-    <a href="https://goplausible.com" target="_blank" rel="noopener">GoPlausible</a>
+    <a href="https://goplausible.com" target="_blank" rel="noopener">GoPlausible</a> ·
+    <a href="https://docs.stripe.com/agents" target="_blank" rel="noopener">Stripe Agents</a> ·
+    <a href="https://docs.stripe.com/projects" target="_blank" rel="noopener">Stripe Projects</a>
   </footer>
 
 </div>
